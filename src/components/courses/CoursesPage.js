@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCourses } from "../api/courseApi";
+import { getCourses } from "../../api/courseApi";
 import CourseList from "./CourseList";
 
 const CoursesPage = () => {
