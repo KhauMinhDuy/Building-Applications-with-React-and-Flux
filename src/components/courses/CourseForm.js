@@ -22,7 +22,7 @@ const CourseForm = (props) => {
           <select
             id="author"
             name="authorId"
-            value={course.authorId}
+            value={course.authorId || "1"}
             className="form-control"
             onChange={onChange}
           >

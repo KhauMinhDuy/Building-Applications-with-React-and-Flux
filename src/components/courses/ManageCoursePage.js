@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 // import { Prompt } from "react-router-dom";
 import CourseForm from "./CourseForm";
 import { saveCourse } from "../../api/courseApi";
 
 const ManageCoursePage = (props) => {
-  const [course, setCourse] = useState({});
+  const [course, setCourse] = useState({
+    id: null,
+    slug: "",
+    title: "",
+    authorId: null,
+    category: "",
+  });
 
   const handlerChange = (event) => {
     setCourse({ ...course, [event.target.name]: event.target.value });
@@ -12,7 +19,10 @@ const ManageCoursePage = (props) => {
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    saveCourse(course);
+    saveCourse(course).then((response) => {
+      props.history.push("/courses");
+      toast.success("Course Saved.");
+    });
   };
 
   return (
