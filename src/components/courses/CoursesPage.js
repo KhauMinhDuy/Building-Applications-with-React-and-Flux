@@ -7,10 +7,6 @@ import * as courseAction from "../../actions/courseActions";
 const CoursesPage = () => {
   const [courses, setCourses] = useState(courseStore.getCourses());
 
-  function onChange() {
-    setCourses(courseStore.getCourses());
-  }
-
   useEffect(() => {
     courseStore.addChangeListener(onChange);
     if (courseStore.getCourses().length === 0) {
@@ -19,13 +15,17 @@ const CoursesPage = () => {
     return () => courseStore.removeChangeListener(onChange);
   }, []);
 
+  const onChange = () => {
+    setCourses(courseStore.getCourses());
+  };
+
   return (
     <>
       <h2>Courses</h2>
       <Link to={"/course"} className="btn btn-primary">
         Add Course
       </Link>
-      <CourseList courses={courses} />
+      <CourseList courses={courses} deleteCourse={courseAction.deleteCourse} />
     </>
   );
 };
